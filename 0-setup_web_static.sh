@@ -18,9 +18,8 @@ echo "
   </body>
 </html>" >> /data/web_static/releases/test/index.html
 
-sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sfn /data/web_static/releases/test/ /data/web_static/current
 search_string='server_name _;'
 alias_hbnb='\\tlocation \/hbnb_static\/ {\n\t\talias \/data/web_static\/current\/;\n}'
 sudo sed -i "/$search_string/a $alias_hbnb" /etc/nginx/sites-available/default
 sudo service nginx reload
-# sudo sed -i "/$search_string/a $replace_string" /etc/haproxy/haproxy.cfg

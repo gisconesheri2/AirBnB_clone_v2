@@ -39,7 +39,7 @@ def do_deploy(archive_path):
 
     # create the folder name to use by stripping the file type
     folder_name = f"/data/web_static/releases/{archive_name.split('.')[0]}"
-    if (resp.suceeded is True):
+    if (resp.succeeded is True):
         resp = run(f"mkdir -p {folder_name}")
     else:
         return (False)

@@ -17,8 +17,20 @@ class FileStorage:
         else:
             temp = {}
             for key, value in FileStorage.__objects.items():
-                if key.split('.')[0] == cls:
-                    temp[key] = value
+                if type(cls) is str:
+                    if key.split('.')[0] == cls:
+                        temp[key] = value
+                else:
+                    from models.base_model import BaseModel
+                    from models.user import User
+                    from models.place import Place
+                    from models.state import State
+                    from models.city import City
+                    from models.amenity import Amenity
+                    from models.review import Review
+
+                    if eval(key.split('.')[0]) is cls:
+                        temp[key] = value
             return temp
 
     def delete(self, obj=None):
@@ -65,3 +77,7 @@ class FileStorage:
                     self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
+
+    def close(self):
+        """calls the reload method to deserialise the JSON file to objects"""
+        self.reload()

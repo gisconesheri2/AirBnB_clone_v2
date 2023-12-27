@@ -45,7 +45,10 @@ class DBStorage():
                   }
         result_dict = {}
         if cls is not None:
-            results = self.__session.query(classes[cls])
+            if type(cls) is str:
+                results = self.__session.query(classes[cls])
+            else:
+                results = self.__session.query(cls)
         else:
             results = self.__session.query(State,
                                            City)
@@ -94,3 +97,10 @@ class DBStorage():
                                        expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+    def close(self):
+        """calls remove on the current scoped session
+        essentially closing the session
+        """
+        self.__session.close()
+

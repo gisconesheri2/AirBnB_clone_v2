@@ -23,6 +23,7 @@ class State(BaseModel, Base):
     def cities(self):
         """defines the relationship between a state and its cities
         in File storage"""
+        from models import storage
         related_cities = []
         file_cities = storage.all(City)
         for key, value in file_cities.items():

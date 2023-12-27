@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+"""serve State objects"""
 from flask import Flask
 from flask import render_template
 from markupsafe import escape
@@ -11,6 +13,7 @@ app.url_map.strict_slashes = False
 
 @app.route("/states_list")
 def get_states():
+    """serve the state objects from storage"""
     states_list = []
     states = storage.all(State)
     states_list = states.values()
@@ -19,6 +22,7 @@ def get_states():
 
 @app.teardown_appcontext
 def close_session(exception):
+    """close down current database session"""
     storage.close()
 
 

@@ -38,11 +38,12 @@ class BaseModel():
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        dictionary = self.__dict__
-        """try:
+        dictionary = {}
+        dictionary.update(self.__dict__)
+        try:
             del dictionary['_sa_instance_state']
         except KeyError:
-            pass"""
+            pass
         return '[{}] ({}) {}'.format(cls, self.id, dictionary)
 
     def save(self):

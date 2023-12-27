@@ -16,6 +16,7 @@ def get_states():
     states_list = states.values()
     return render_template("7-states_list.html", states=states_list)
 
+
 @app.teardown_appcontext
 def close_session(exception):
     storage.close()

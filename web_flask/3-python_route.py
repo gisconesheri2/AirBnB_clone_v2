@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """flask web application handling several routes"""
 from flask import Flask
 from markupsafe import escape

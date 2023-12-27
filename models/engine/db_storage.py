@@ -84,11 +84,11 @@ class DBStorage():
         """create all tables in the database and start up the session object"""
         from models.base_model import BaseModel, Base
         from models.user import User
-        from models.place import Place
-        from models.state import State
         from models.city import City
+        from models.state import State
         from models.amenity import Amenity
         from models.review import Review
+        from models.place import Place
         from sqlalchemy.orm import scoped_session, sessionmaker
 
         Base.metadata.create_all(self.__engine)

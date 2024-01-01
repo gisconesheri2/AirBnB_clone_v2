@@ -17,10 +17,10 @@ class User(BaseModel, Base):
         BaseModel.__init__(self)
         BaseModel.__init__(self, **kwargs)
 
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
+    email = Column(String(128, collation='latin1_swedish_ci'), nullable=False)
+    password = Column(String(128, collation='latin1_swedish_ci'), nullable=False)
+    first_name = Column(String(128, collation='latin1_swedish_ci'))
+    last_name = Column(String(128, collation='latin1_swedish_ci'))
 
     places = relationship('Place', backref='user', cascade='all, delete')
     reviews = relationship('Review', backref='user', cascade='all, delete')

@@ -17,11 +17,10 @@ static_url_path = '/static'
 def serve_hbnb():
     """serve the state objects from storage"""
     states = storage.all(State)
-    states = states.values()
-    print(states)
+    sta = states.values()
     amenities = storage.all(Amenity)
-    amenities = amenities.values()
-    return render_template("10-hbnb_filters.html", states=states, amenities=amenities)
+    amen = amenities.values()
+    return render_template("10-hbnb_filters.html", states=sta, amenities=amen)
 
 
 @app.teardown_appcontext

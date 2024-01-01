@@ -14,6 +14,6 @@ class Review(BaseModel, Base):
         BaseModel.__init__(self)
         BaseModel.__init__(self, **kwargs)
 
-    text = Column(String(1024), nullable=False)
-    place_id = Column(String(60), ForeignKey('places.id'), nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    text = Column(String(1024, collation='latin1_swedish_ci'), nullable=False)
+    place_id = Column(String(60, collation='latin1_swedish_ci'), ForeignKey('places.id'), nullable=False)
+    user_id = Column(String(60, collation='latin1_swedish_ci'), ForeignKey('users.id'), nullable=False)

@@ -14,4 +14,4 @@ class Amenity(BaseModel, Base):
 
     __tablename__ = 'amenities'
 
-    name = Column(String(128), nullable=False)
+    name = Column(String(128, collation='latin1_swedish_ci'), nullable=False)

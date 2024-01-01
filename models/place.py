@@ -5,12 +5,14 @@ from sqlalchemy import Column, String, ForeignKey, Float, Integer, Table
 from sqlalchemy.orm import relationship
 from models.review import Review
 from models.amenity import Amenity
+# from models.city import City 
 
 place_amenity = Table('place_amenity', Base.metadata,
-                      Column('place_id', String(60), ForeignKey('places.id'),
+                      Column('place_id', String(60, collation='latin1_swedish_ci'), ForeignKey('places.id'),
                              primary_key=True),
-                      Column('amenity_id', String(60),
-                             ForeignKey('amenities.id'), primary_key=True))
+                      Column('amenity_id', String(60, collation='latin1_swedish_ci'),
+                             ForeignKey('amenities.id'), primary_key=True)
+                      )
 
 
 class Place(BaseModel, Base):
@@ -23,10 +25,10 @@ class Place(BaseModel, Base):
         BaseModel.__init__(self)
         BaseModel.__init__(self, **kwargs)
 
-    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-    name = Column(String(128), nullable=False)
-    description = Column(String(1024))
+    city_id = Column(String(60, collation='latin1_swedish_ci'), ForeignKey('cities.id'), nullable=False)
+    user_id = Column(String(60, collation='latin1_swedish_ci'), ForeignKey('users.id'), nullable=False)
+    name = Column(String(128, collation='latin1_swedish_ci'), nullable=False)
+    description = Column(String(1024, collation='latin1_swedish_ci'))
     number_rooms = Column(Integer(), default=0, nullable=False)
     number_bathrooms = Column(Integer(), default=0, nullable=False)
     max_guest = Column(Integer(), default=0, nullable=False)

@@ -5,20 +5,28 @@ from flask import render_template
 from markupsafe import escape
 from models import storage
 from models.state import State
-from models.city import City
 
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
-@app.route("/cities_by_states")
-def get_states_and_cities():
+@app.route("/states")
+def states_with_no_id():
     """serve the state objects from storage"""
-    # if os.environ['HBNB_TYPE_STORAGE'] == "db":
+    id_given = 0
     states = storage.all(State)
     states_list = list(states.values())
-    return render_template("8-cities_by_states.html", states=states_list)
+    return render_template("9-states.html", states=states_list, id_given=0)
+
+
+@app.route("/states/<id>")
+def states_with_id(id):
+    """serve the state object with given id from storage"""
+    states = storage.all(State)
+    key_name = f"State.{id}"
+    state_with_id = states.get(key_name, None)
+    return render_template("9-states.html", states=state_with_id, id_given=1)
 
 
 @app.teardown_appcontext

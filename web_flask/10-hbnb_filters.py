@@ -1,24 +1,27 @@
-#!/usr/bin/python3
+#!/usr/bis/python3
 """serve State objects"""
 from flask import Flask
 from flask import render_template
 from markupsafe import escape
 from models import storage
 from models.state import State
-from models.city import City
+from models.amenity import Amenity
 
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+static_url_path = '/static'
 
 
-@app.route("/cities_by_states")
-def get_states_and_cities():
+@app.route("/hbnb_filters")
+def serve_hbnb():
     """serve the state objects from storage"""
-    # if os.environ['HBNB_TYPE_STORAGE'] == "db":
     states = storage.all(State)
-    states_list = list(states.values())
-    return render_template("8-cities_by_states.html", states=states_list)
+    states = states.values()
+    print(states)
+    amenities = storage.all(Amenity)
+    amenities = amenities.values()
+    return render_template("10-hbnb_filters.html", states=states, amenities=amenities)
 
 
 @app.teardown_appcontext

@@ -22,7 +22,8 @@ class DBStorage():
         database = os.environ['HBNB_MYSQL_DB']
         program_env = os.environ['HBNB_ENV']
 
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}?charset=latin1'
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}\
+                                        ?charset=latin1'
                                       .format(user, password, host, database),
                                       pool_pre_ping=True)
         if program_env == 'test':
